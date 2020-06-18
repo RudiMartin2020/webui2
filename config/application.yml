@@ -1,0 +1,30 @@
+spring:
+  datasource:
+#    initialization-mode: never
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:./demodb
+    username: sa
+    password: bistel01
+  h2:
+    console:
+      enabled: true
+
+  activemq:
+    broker-url: tcp://localhost:61616
+
+destination:
+  topic:
+    server: amp-server
+    client: amp-client
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    lazyLoadingEnabled: true
+    aggressiveLazyLoading: false
+    mapUnderscoreToCamelCase: true
+
+logging:
+  level:
+    root: error
+    com.example.demo: info

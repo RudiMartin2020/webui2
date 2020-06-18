@@ -1,0 +1,5 @@
+#!/bin/bash
+
+JAR_NAME=backend-demo.jar
+
+java -jar target/$JAR_NAME --spring.config.location=config/
