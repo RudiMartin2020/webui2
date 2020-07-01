@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao2.DB2Mapper">
+    <select id="getDb2Dual"  resultType="java.lang.String">
+        SELECT 'DB2' FROM DUAL;
+    </select>
+    <select id="selectUser" resultType="com.example.demo.domain.USER_MST_PP">
+        select user_id, user_name, create_dtts, last_update_dtts from user_mst_temp
+    </select>
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id" parameterType="com.example.demo.domain.USER_MST_PP">
+        insert into user_mst_temp(rawid, user_id, user_name, password, description, create_dtts, last_update_dtts, last_update_by, password_ch_dtts, password_fail_count, locked_yn, location_rawid, area_rawid, phone_no, department, title, responsibilities, area_node_rawid, area_node_rawids)
+        values (seq_user_mst_pp.nextval, #{user_name}, #{user_name}, 'MQ==',
+        'SA', TO_TIMESTAMP('2018-07-25 오전 10:44:33.608000','YYYY-MM-DD AM fmHH12fm:MI:SS.FF'), TO_TIMESTAMP('2018-11-16 오후 2:26:07.427000','YYYY-MM-DD AM fmHH12fm:MI:SS.FF'), 'SA',
+        0, 'N', '111-1111-1111', '비스텔', '책임', 'AAA', '-1')
+    </insert>
+    <update id="updateUser">
+        update user_mst_temp set user_name=#{user_name}, last_update_dtts=#{last_update_dtts} where id=#{user_id}
+    </update>
+    <delete id="deleteUser">
+        delete from user_mst_temp where id = #{user_id}
+    </delete>
+    <insert id="insertTodo"  useGeneratedKeys="true" parameterType="com.example.demo.domain.Todo">
+       <selectKey keyProperty="id" resultType="com.example.demo.domain.Todo" order="BEFORE">
+            SELECT SEQ_TODO.nextval as id From DUAL
+        </selectKey>
+        <!--insert into todo(id, text, create_at, update_at ) values (#{id}, #{text}, #{createAt}, #{updateAt}) -->
+        insert into todo(id, text, create_at, update_at ) values ( #{id, jdbcType=VARCHAR}, #{text,jdbcType=VARCHAR}, #{createAt,jdbcType=VARCHAR},#{updateAt,jdbcType=VARCHAR})
+    </insert>
+    <update id="updateTodo">
+        update todo set text=#{text}, update_at=#{updateAt} where id=#{id}
+    </update>
+    <delete id="deleteTodo">
+        delete from todo where id = #{id}
+    </delete>
+    <select id="selectTodo" resultType="com.example.demo.domain.Todo">
+        select id, text, create_AT, update_AT from todo order by id
+    </select>
+
+</mapper>

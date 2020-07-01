@@ -1,21 +1,29 @@
 spring:
-  datasource:
-#    initialization-mode: never
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:./demodb
-    username: sa
-    password: bistel01
+  db1:
+    #initialization-mode: never
+    datasource:
+      driver-class-name: org.h2.Driver
+      jdbcurl: jdbc:h2:mem:demodb
+      username: sa
+      password: bistel01
+  db2:
+    datasource:
+      driver-class-name: oracle.jdbc.driver.OracleDriver
+      jdbcurl: jdbc:oracle:thin:@10.150.1.144:1521:eesdev
+      username: fdcapp
+      password: -fdcap2018
+
   h2:
     console:
       enabled: true
 
   activemq:
-    broker-url: tcp://localhost:61616
+    broker-url: tcp://10.150.1.144:61616
 
 destination:
   topic:
-    server: amp-server
-    client: amp-client
+    server: AMQ_RMS_CLIENT_SERVER_TEST
+    client: AMQ_RMS_SERVER_REVOKE_TEST
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
@@ -27,4 +35,4 @@ mybatis:
 logging:
   level:
     root: error
-    com.example.demo: info
+    com.example.demo: debug

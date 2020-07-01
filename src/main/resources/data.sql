@@ -1,1 +1,1 @@
-insert into todo(text, create_at) values('buy a car', CURRENT_TIMESTAMP());
+insert into todo(text, create_at) values('H2_Connected', CURRENT_TIMESTAMP());
